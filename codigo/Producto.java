@@ -3,5 +3,7 @@ abstract class Producto {
     public Producto(int x){
         this.serie = x;
     }
-
+    public int getSerie() {
+        return serie;
+    }
 }
