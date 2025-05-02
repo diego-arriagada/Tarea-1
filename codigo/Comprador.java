@@ -1,3 +1,11 @@
+/**
+ * Clase Comprador que sirve para simular la compra de un producto en la máquina expendedora.
+ *
+ * @author Diego Arriagada
+ * @author Victor Galaz
+ * @author Matias Catril
+ * @version 1.0
+ */
 class Comprador {
     private String sonidoBebida;
     private int vueltoTotal;

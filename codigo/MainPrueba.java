@@ -1,4 +1,4 @@
-public class Main {
+public class MainPrueba {
     public static void main(String[] args) {
         Moneda m = new Moneda100();
         Expendedor exp = new Expendedor(0,100);
