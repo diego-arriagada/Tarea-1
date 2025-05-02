@@ -4,9 +4,9 @@ class Comprador {
 
     public Comprador(Moneda m, int cualBebida, Expendedor exp) {
         Bebida bebida = null;
-
+        Producto producto = null;
         try {
-            bebida = exp.comprarProducto(m, cualBebida); // Intenta comprar la bebida
+            producto = exp.comprarProducto(m, cualBebida); // Intenta comprar la bebida
         } catch (Exception e) {
             // Si hay algun problema (por ejemplo, sin saldo o sin bebida), no se asigna bebida
             bebida = null;
