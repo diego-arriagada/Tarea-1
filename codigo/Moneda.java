@@ -1,6 +1,8 @@
 /**
  * Clase abstracta Moneda, que forma la base de la jerarquía de monedas.
  *
+ * La clase implementa la interfaz Comparable, para establecer un criterio a usar en la ordenacion del main.
+ *
  * @author Diego Arriagada
  * @author Victor Galaz
  * @author Matias Catril
