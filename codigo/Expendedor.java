@@ -15,7 +15,7 @@ class Expendedor {
         for (int i = 0; i < numBebidas; i++) {
             coca.addObjeto(new CocaCola(100 + i));
             sprite.addObjeto(new Sprite(200 + i));
-            snicker.addObjeto(new Snicker(300 + i));
+            snicker.addObjeto(new Snickers(300 + i));
             super8.addObjeto(new Super8(400 + i));
         }
     }

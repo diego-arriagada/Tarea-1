@@ -5,4 +5,7 @@ class CocaCola extends Bebida {
     public String beber() {
         return "cocacola";
     }
+    public double getPrecio() {
+        return PreciosProductos.COCACOLA.getPrecio();
+    }
 }

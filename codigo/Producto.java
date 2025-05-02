@@ -6,4 +6,5 @@ abstract class Producto {
     public int getSerie() {
         return serie;
     }
+    public abstract double getPrecio();
 }

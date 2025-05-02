@@ -6,4 +6,7 @@ public class Super8 extends Dulce {
     public String comer(){
         return "super8";
     }
+    public double getPrecio() {
+        return PreciosProductos.SUPER8.getPrecio();
+    }
 }

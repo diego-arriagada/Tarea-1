@@ -5,4 +5,7 @@ class Sprite extends Bebida {
     public String beber() {
         return "sprite";
     }
+    public double getPrecio() {
+        return PreciosProductos.SPRITE.getPrecio();
+    }
 }
