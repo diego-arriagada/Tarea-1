@@ -2,15 +2,20 @@ class Expendedor {
     private Deposito<Bebida> coca;
     private Deposito<Bebida> sprite;
     private Deposito<Moneda> monVu;
+    private Deposito<Dulce> snicker;
+    private Deposito<Dulce> super8;
     private int precio;
     public Expendedor(int numBebidas, int precioBebidas) {
         coca = new Deposito();
         sprite = new Deposito();
+        snicker = new Deposito();
+        super8 = new Deposito();
         monVu = new Deposito();
         this.precio = precioBebidas;
         for (int i = 0; i < numBebidas; i++) {
             coca.addObjeto(new CocaCola(100 + i));
             sprite.addObjeto(new Sprite(200 + i));
+            snicker.addObjeto(new);
         }
     }
     public static final int COCA = 1;
@@ -30,7 +35,9 @@ class Expendedor {
                         bebida = sprite.getObjeto();
                         break;
                     case SNICKERS:
-                        dulce = dulce.getObjeto();
+                        dulce = snicker.getObjeto();
+                    case SUPER8:
+                        dulce = super8.getObjeto();
                 }
                 if (bebida != null) { // Solo calcula vuelto si hay bebida disponible
                     int vuelto = m.getValor() - precio;

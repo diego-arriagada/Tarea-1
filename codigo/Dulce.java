@@ -1,4 +1,6 @@
 abstract class Dulce extends Producto {
-    public Dulce(){
+    private int serie;
+    public Dulce(int x){
+        super(x);
     }
 }
