@@ -1,73 +1,108 @@
+/**
+ * La clase `Expendedor` representa una máquina expendedora que gestiona la lógica
+ * para dispensar productos y manejar pagos.
+ *
+ * Contiene múltiples depósitos de productos y un depósito para monedas devueltas.
+ * La clase permite comprar productos y calcular el vuelto.
+ *
+ * @author Diego Arriagada
+ * @author Victor Galaz
+ * @author Matias Catril
+ * @version 1.0
+ */
 class Expendedor {
-    private Deposito<Bebida> coca;
-    private Deposito<Bebida> sprite;
+    private Deposito<Producto> coca;
+    private Deposito<Producto> sprite;
+    private Deposito<Producto> fanta;
+    private Deposito<Producto> snicker;
+    private Deposito<Producto> super8;
     private Deposito<Moneda> monVu;
-    private Deposito<Dulce> snicker;
-    private Deposito<Dulce> super8;
-    private int precio;
-    public Expendedor(int numBebidas, int precioBebidas) {
-        coca = new Deposito();
-        sprite = new Deposito();
-        snicker = new Deposito();
-        super8 = new Deposito();
-        monVu = new Deposito();
-        this.precio = precioBebidas;
-        for (int i = 0; i < numBebidas; i++) {
+
+    /**
+     * Construye un `Expendedor` con el número especificado de productos para cada tipo.
+     *
+     * @param numProductos el número de productos a inicializar en cada depósito
+     */
+    public Expendedor(int numProductos) {
+        coca = new Deposito<>();
+        sprite = new Deposito<>();
+        fanta = new Deposito<>();
+        snicker = new Deposito<>();
+        super8 = new Deposito<>();
+        monVu = new Deposito<>();
+
+        for (int i = 0; i < numProductos; i++) {
             coca.addObjeto(new CocaCola(100 + i));
             sprite.addObjeto(new Sprite(200 + i));
-            snicker.addObjeto(new Snicker(300 + i));
-            super8.addObjeto(new Super8(400 + i));
+            fanta.addObjeto(new Fanta(300 + i));
+            snicker.addObjeto(new Snickers(400 + i));
+            super8.addObjeto(new Super8(500 + i));
         }
     }
+
     public static final int COCA = 1;
     public static final int SPRITE = 2;
-    public static final int SNICKERS = 3;
-    public static final int SUPER8 = 4;
+    public static final int FANTA = 3;
+    public static final int SNICKERS = 4;
+    public static final int SUPER8 = 5;
+
+    /**
+     * Intenta comprar un producto de la máquina expendedora.
+     *
+     * Si el pago es insuficiente, el producto está agotado o el tipo de producto
+     * es inválido, la moneda se devuelve al depósito de monedas.
+     *
+     * @param m    la moneda utilizada para el pago
+     * @param cual el tipo de producto a comprar (por ejemplo, `COCA`, `SPRITE`)
+     * @return el producto comprado, o `null` si la compra falla
+     */
     public Producto comprarProducto(Moneda m, int cual) {
-        Bebida bebida = null;
-        Dulce dulce = null;
-        try {
-            RevisarMoneda.revisar(m);
-        }
-        catch (PagoIncorrectoException ex){
-            System.out.println(ex.getMessage());
-            return null;
-        }
-        try {
-            ComparaPrecio.compara(m.getValor(), precio); //FALTA CAMBIAR ENUMERACION PARA PRECIOS
-        }
-        catch (PagoInsuficienteException ex){
-            System.out.println(ex.getMessage());
-            monVu.addObjeto(m);
+        if (m == null) {
             return null;
         }
 
+        Deposito<Producto> depositoSeleccionado = null;
+        double precioProducto = 0;
+
         switch (cual) {
             case COCA:
-                bebida = coca.getObjeto();
+                depositoSeleccionado = coca;
+                precioProducto = PreciosProductos.COCA.getPrecio();
                 break;
             case SPRITE:
-                bebida = sprite.getObjeto();
+                depositoSeleccionado = sprite;
+                precioProducto = PreciosProductos.SPRITE.getPrecio();
+                break;
+            case FANTA:
+                depositoSeleccionado = fanta;
+                precioProducto = PreciosProductos.FANTA.getPrecio();
                 break;
             case SNICKERS:
-                dulce = snicker.getObjeto();
+                depositoSeleccionado = snicker;
+                precioProducto = PreciosProductos.SNICKERS.getPrecio();
+                break;
             case SUPER8:
-                dulce = super8.getObjeto();
-        }
-        try {
-            RevisaProducto.revisar(bebida); //Revisa si es que bebida es nulo
-        }
-        catch (NoHayProductoException ex){
-            try {
-                RevisaProducto.revisar(dulce); //En caso que bebida sea nulo, revisa si dulce es nulo para confirmar que no hay del producto que se pidió
-            }
-            catch (NoHayProductoException ex2){
-                System.out.println(ex.getMessage());
-                monVu.addObjeto(m);
+                depositoSeleccionado = super8;
+                precioProducto = PreciosProductos.SUPER8.getPrecio();
+                break;
+            default:
+                monVu.addObjeto(m); // Devuelve la moneda si no existe el producto
                 return null;
-            }
         }
-        int vuelto = m.getValor() - precio;
+
+        if (m.getValor() < precioProducto) {
+            monVu.addObjeto(m); // Devuelve la moneda si no alcanza
+            return null;
+        }
+
+        Producto producto = depositoSeleccionado.getObjeto();
+        if (producto == null) {
+            monVu.addObjeto(m); // Devuelve la moneda si no hay stock
+            return null;
+        }
+
+        // Calcula el vuelto
+        int vuelto = (int)(m.getValor() - precioProducto);
         while (vuelto > 0) {
             if (vuelto >= 1500) {
                 monVu.addObjeto(new Moneda1500());
@@ -83,12 +118,16 @@ class Expendedor {
                 vuelto -= 100;
             }
         }
-        if (bebida == null){
-            return dulce;
-        }
-        else return bebida;
+
+        return producto;
     }
-    public Moneda getVuelto(){ // retorna una moneda desde el deposito de vuelto, hay que llamarla hasta que quede vacio
+
+    /**
+     * Recupera una moneda del depósito de monedas (vuelto).
+     *
+     * @return una moneda del depósito de monedas, o `null` si no hay monedas disponibles
+     */
+    public Moneda getVuelto() {
         return monVu.getObjeto();
     }
 }
