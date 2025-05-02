@@ -1,7 +1,7 @@
-abstract class Bebida {
+abstract class Bebida extends Producto {
     private int serie;
-    public Bebida(int serie) {
-        this.serie = serie;
+    public Bebida(int x) {
+        super(x);
     }
     public int getSerie() {
         return serie;
