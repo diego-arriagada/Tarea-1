@@ -6,7 +6,7 @@ class Comprador {
         Bebida bebida = null;
 
         try {
-            bebida = exp.comprarBebida(m, cualBebida); // Intenta comprar la bebida
+            bebida = exp.comprarProducto(m, cualBebida); // Intenta comprar la bebida
         } catch (Exception e) {
             // Si hay algun problema (por ejemplo, sin saldo o sin bebida), no se asigna bebida
             bebida = null;

@@ -1,31 +1,20 @@
 import java.util.ArrayList;
 
-class Deposito {
-    ArrayList<Bebida> depositoB;
-    ArrayList<Moneda> depositoM;
+public class Deposito<T> {
+    ArrayList<T> deposito;
     public Deposito() {
-        depositoB = new ArrayList<Bebida>();
-        depositoM = new ArrayList<Moneda>();
+        deposito = new ArrayList<T>();
     }
-    public void addBebida(Bebida b) {
-        depositoB.add(b);
-    }
-    public Bebida getBebida(){ // funciona como FIFO
-        if (depositoB.size() > 0) {
-            return depositoB.remove(0);
-        }
-        return null;
-    }
-    public void addMoneda(Moneda m) {
+    public void addObjeto(T m) {
         // Agregar moneda al deposito de vuelto
         if (m != null) {
-            depositoM.add(m);
+            deposito.add(m);
         }
     }
-    public Moneda getMoneda(){
+    public Moneda getObjeto(){
         // Retornar una moneda del deposito de vuelto
-        if (depositoM.size() > 0) {
-            return (Moneda) depositoM.remove(0);
+        if (deposito.size() > 0) {
+            return (Moneda) deposito.remove(0);
         }
         return null;
     }
