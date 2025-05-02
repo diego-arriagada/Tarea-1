@@ -1,3 +1,15 @@
+/**
+ * La clase `Expendedor` representa una máquina expendedora que gestiona la lógica
+ * para dispensar productos y manejar pagos.
+ *
+ * Contiene múltiples depósitos de productos y un depósito para monedas devueltas.
+ * La clase permite comprar productos y calcular el vuelto.
+ *
+ * @author Diego Arriagada
+ * @author Victor Galaz
+ * @author Matias Catril
+ * @version 1.0
+ */
 class Expendedor {
     private Deposito<Producto> coca;
     private Deposito<Producto> sprite;
@@ -6,6 +18,11 @@ class Expendedor {
     private Deposito<Producto> super8;
     private Deposito<Moneda> monVu;
 
+    /**
+     * Construye un `Expendedor` con el número especificado de productos para cada tipo.
+     *
+     * @param numProductos el número de productos a inicializar en cada depósito
+     */
     public Expendedor(int numProductos) {
         coca = new Deposito<>();
         sprite = new Deposito<>();
@@ -29,6 +46,16 @@ class Expendedor {
     public static final int SNICKERS = 4;
     public static final int SUPER8 = 5;
 
+    /**
+     * Intenta comprar un producto de la máquina expendedora.
+     *
+     * Si el pago es insuficiente, el producto está agotado o el tipo de producto
+     * es inválido, la moneda se devuelve al depósito de monedas.
+     *
+     * @param m    la moneda utilizada para el pago
+     * @param cual el tipo de producto a comprar (por ejemplo, `COCA`, `SPRITE`)
+     * @return el producto comprado, o `null` si la compra falla
+     */
     public Producto comprarProducto(Moneda m, int cual) {
         if (m == null) {
             return null;
@@ -95,6 +122,11 @@ class Expendedor {
         return producto;
     }
 
+    /**
+     * Recupera una moneda del depósito de monedas (vuelto).
+     *
+     * @return una moneda del depósito de monedas, o `null` si no hay monedas disponibles
+     */
     public Moneda getVuelto() {
         return monVu.getObjeto();
     }

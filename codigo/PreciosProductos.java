@@ -1,3 +1,11 @@
+/**
+ * Enumeración que guarda los precios de los productos disponibles en la máquina expendedora.
+ *
+ * @author Diego Arriagada
+ * @author Victor Galaz
+ * @author Matias Catril
+ * @version 1.0
+ */
 public enum PreciosProductos {
     SNICKERS(1200),
     SUPER8(600),

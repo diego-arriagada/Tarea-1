@@ -1,3 +1,11 @@
+/**
+ * Clase abstracta Moneda, que forma la base de la jerarquía de monedas.
+ *
+ * @author Diego Arriagada
+ * @author Victor Galaz
+ * @author Matias Catril
+ * @version 1.0
+ */
 abstract class Moneda implements Comparable { //
     public Moneda() {
     }
