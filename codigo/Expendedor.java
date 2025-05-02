@@ -1,75 +1,101 @@
 class Expendedor {
-    private Deposito<Bebida> coca;
-    private Deposito<Bebida> sprite;
+    private Deposito<Producto> coca;
+    private Deposito<Producto> sprite;
+    private Deposito<Producto> fanta;
+    private Deposito<Producto> snicker;
+    private Deposito<Producto> super8;
     private Deposito<Moneda> monVu;
-    private Deposito<Dulce> snicker;
-    private Deposito<Dulce> super8;
-    private int precio;
-    public Expendedor(int numBebidas, int precioBebidas) {
-        coca = new Deposito();
-        sprite = new Deposito();
-        snicker = new Deposito();
-        super8 = new Deposito();
-        monVu = new Deposito();
-        this.precio = precioBebidas;
-        for (int i = 0; i < numBebidas; i++) {
+
+    public Expendedor(int numProductos) {
+        coca = new Deposito<>();
+        sprite = new Deposito<>();
+        fanta = new Deposito<>();
+        snicker = new Deposito<>();
+        super8 = new Deposito<>();
+        monVu = new Deposito<>();
+
+        for (int i = 0; i < numProductos; i++) {
             coca.addObjeto(new CocaCola(100 + i));
             sprite.addObjeto(new Sprite(200 + i));
-            snicker.addObjeto(new Snickers(300 + i));
-            super8.addObjeto(new Super8(400 + i));
+            fanta.addObjeto(new Fanta(300 + i));
+            snicker.addObjeto(new Snickers(400 + i));
+            super8.addObjeto(new Super8(500 + i));
         }
     }
+
     public static final int COCA = 1;
     public static final int SPRITE = 2;
-    public static final int SNICKERS = 3;
-    public static final int SUPER8 = 4;
+    public static final int FANTA = 3;
+    public static final int SNICKERS = 4;
+    public static final int SUPER8 = 5;
+
     public Producto comprarProducto(Moneda m, int cual) {
-        Bebida bebida = null;
-        Dulce dulce = null;
-        if (m != null) {
-            if (m.getValor() >= precio) { // Verifica si el dinero es suficiente
-                switch (cual) {
-                    case COCA:
-                        bebida = coca.getObjeto();
-                        break;
-                    case SPRITE:
-                        bebida = sprite.getObjeto();
-                        break;
-                    case SNICKERS:
-                        dulce = snicker.getObjeto();
-                    case SUPER8:
-                        dulce = super8.getObjeto();
-                }
-                if (bebida != null) { // Solo calcula vuelto si hay bebida disponible
-                    int vuelto = m.getValor() - precio;
-                    while (vuelto > 0) {
-                        if (vuelto >= 1500) {
-                            monVu.addObjeto(new Moneda1500());
-                            vuelto -= 1500;
-                        } else if (vuelto >= 1000) {
-                            monVu.addObjeto(new Moneda1000());
-                            vuelto -= 1000;
-                        } else if (vuelto >= 500) {
-                            monVu.addObjeto(new Moneda500());
-                            vuelto -= 500;
-                        } else if (vuelto >= 100) {
-                            monVu.addObjeto(new Moneda100());
-                            vuelto -= 100;
-                        }
-                    }
-                } else {
-                    // Si no hay bebida, devuelve la moneda completa
-                    monVu.addObjeto(m);
-                }
-            } else {
-                // Si el pago es insuficiente, devuelve la moneda completa
-                monVu.addObjeto(m);
-                return null; // Retorna null explicitamente
+        if (m == null) {
+            return null;
+        }
+
+        Deposito<Producto> depositoSeleccionado = null;
+        double precioProducto = 0;
+
+        switch (cual) {
+            case COCA:
+                depositoSeleccionado = coca;
+                precioProducto = PreciosProductos.COCA.getPrecio();
+                break;
+            case SPRITE:
+                depositoSeleccionado = sprite;
+                precioProducto = PreciosProductos.SPRITE.getPrecio();
+                break;
+            case FANTA:
+                depositoSeleccionado = fanta;
+                precioProducto = PreciosProductos.FANTA.getPrecio();
+                break;
+            case SNICKERS:
+                depositoSeleccionado = snicker;
+                precioProducto = PreciosProductos.SNICKERS.getPrecio();
+                break;
+            case SUPER8:
+                depositoSeleccionado = super8;
+                precioProducto = PreciosProductos.SUPER8.getPrecio();
+                break;
+            default:
+                monVu.addObjeto(m); // Devuelve la moneda si no existe el producto
+                return null;
+        }
+
+        if (m.getValor() < precioProducto) {
+            monVu.addObjeto(m); // Devuelve la moneda si no alcanza
+            return null;
+        }
+
+        Producto producto = depositoSeleccionado.getObjeto();
+        if (producto == null) {
+            monVu.addObjeto(m); // Devuelve la moneda si no hay stock
+            return null;
+        }
+
+        // Calcula el vuelto
+        int vuelto = (int)(m.getValor() - precioProducto);
+        while (vuelto > 0) {
+            if (vuelto >= 1500) {
+                monVu.addObjeto(new Moneda1500());
+                vuelto -= 1500;
+            } else if (vuelto >= 1000) {
+                monVu.addObjeto(new Moneda1000());
+                vuelto -= 1000;
+            } else if (vuelto >= 500) {
+                monVu.addObjeto(new Moneda500());
+                vuelto -= 500;
+            } else if (vuelto >= 100) {
+                monVu.addObjeto(new Moneda100());
+                vuelto -= 100;
             }
         }
-        return bebida;
+
+        return producto;
     }
-    public Moneda getVuelto(){ // retorna una moneda desde el deposito de vuelto, hay que llamarla hasta que quede vacio
+
+    public Moneda getVuelto() {
         return monVu.getObjeto();
     }
 }

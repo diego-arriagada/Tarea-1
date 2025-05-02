@@ -3,7 +3,7 @@ public enum PreciosProductos {
     SUPER8(600),
 
     SPRITE(1100),
-    COCACOLA(1200),
+    COCA(1200),
     FANTA(1000);
 
     private final double precio;

@@ -6,6 +6,6 @@ class CocaCola extends Bebida {
         return "cocacola";
     }
     public double getPrecio() {
-        return PreciosProductos.COCACOLA.getPrecio();
+        return PreciosProductos.COCA.getPrecio();
     }
 }
