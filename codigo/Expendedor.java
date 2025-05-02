@@ -15,6 +15,8 @@ class Expendedor {
     }
     public static final int COCA = 1;
     public static final int SPRITE = 2;
+    public static final int SNICKERS = 3;
+    public static final int SUPER8 = 4;
     public Producto comprarProducto(Moneda m, int cual) {
         Bebida bebida = null;
         Dulce dulce = null;
@@ -27,6 +29,8 @@ class Expendedor {
                     case SPRITE:
                         bebida = sprite.getObjeto();
                         break;
+                    case SNICKERS:
+                        dulce = dulce.getObjeto();
                 }
                 if (bebida != null) { // Solo calcula vuelto si hay bebida disponible
                     int vuelto = m.getValor() - precio;

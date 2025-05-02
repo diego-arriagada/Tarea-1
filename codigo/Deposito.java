@@ -11,10 +11,10 @@ public class Deposito<T> {
             deposito.add(m);
         }
     }
-    public Moneda getObjeto(){
+    public T getObjeto(){
         // Retornar una moneda del deposito de vuelto
         if (deposito.size() > 0) {
-            return (Moneda) deposito.remove(0);
+            return (T)deposito.remove(0);
         }
         return null;
     }
