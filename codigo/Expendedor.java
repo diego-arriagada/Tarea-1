@@ -62,7 +62,7 @@ class Expendedor {
                 RevisaProducto.revisar(dulce); //En caso que bebida sea nulo, revisa si dulce es nulo para confirmar que no hay del producto que se pidió
             }
             catch (NoHayProductoException ex2){
-                ex2.getMessage();
+                System.out.println(ex.getMessage());
                 monVu.addObjeto(m);
                 return null;
             }
