@@ -12,5 +12,4 @@ abstract class Bebida extends Producto {
         super(x);
     }
 
-    public abstract String beber(); // metodo abstracto que se implementa en las subclases
 }

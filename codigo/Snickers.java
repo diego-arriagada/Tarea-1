@@ -11,7 +11,7 @@ public class Snickers extends Dulce {
     public Snickers(int x){
         super(x);
     }
-    public String comer(){
+    public String consumir(){
         return "snickers";
     }
     public double getPrecio() {

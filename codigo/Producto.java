@@ -15,4 +15,6 @@ abstract class Producto {
         return serie;
     }
     public abstract double getPrecio();
+
+    public abstract String consumir();
 }

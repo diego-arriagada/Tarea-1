@@ -7,12 +7,11 @@
  * @version 1.0
  */
 public enum PreciosProductos {
-    SNICKERS(1200),
-    SUPER8(600),
-
-    SPRITE(1100),
-    COCA(1200),
-    FANTA(1000);
+    SNICKERS(200),
+    SUPER8(100),
+    SPRITE(400),
+    COCA(500),
+    FANTA(300);
 
     private final double precio;
 

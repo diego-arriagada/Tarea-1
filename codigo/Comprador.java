@@ -7,11 +7,10 @@
  * @version 1.0
  */
 class Comprador {
-    private String sonidoBebida;
+    private String sonidoProducto;
     private int vueltoTotal;
 
     public Comprador(Moneda m, int cualProducto, Expendedor exp) {
-        Bebida bebida = null;
         Producto producto = null;
         try {
             producto = exp.comprarProducto(m, cualProducto); // Intenta comprar la bebida
@@ -27,10 +26,11 @@ class Comprador {
             System.out.println(exe.getMessage());
         }
 
-        if (bebida != null) {
-            sonidoBebida = bebida.beber(); // Guarda el sonido de la bebida
+        if (producto != null) {
+            sonidoProducto = producto.consumir(); // Guarda el sonido de la bebida
+            System.out.println("Compra exitosa de " + sonidoProducto + ", vuelto total = " + cuantoVuelto());
         } else {
-            sonidoBebida = null;
+            sonidoProducto = null;
         }
 
         // Calcula la suma del vuelto entregado por el expendedor
@@ -46,6 +46,6 @@ class Comprador {
     }
 
     public String queBebiste() {
-        return sonidoBebida;
+        return sonidoProducto;
     }
 }
