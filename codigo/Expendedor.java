@@ -57,9 +57,12 @@ class Expendedor {
      * @return el producto comprado, o `null` si la compra falla
      */
     public Producto comprarProducto(Moneda m, int cual) {
-        if (m == null) {
-            return null;
+        try{RevisarMoneda.revisar(m);
+        }catch(PagoIncorrectoException ex){
+            System.out.println(ex.getMessage()); //arroja mensaje de error por pago incorrecto
+            return null; //si se ingresa una moneda nula retorna nulo
         }
+
 
         Deposito<Producto> depositoSeleccionado = null;
         double precioProducto = 0;
@@ -89,18 +92,22 @@ class Expendedor {
                 monVu.addObjeto(m); // Devuelve la moneda si no existe el producto
                 return null;
         }
-
-        if (m.getValor() < precioProducto) {
-            monVu.addObjeto(m); // Devuelve la moneda si no alcanza
+        try {ComparaPrecio.compara(m.getValor(), (precioProducto));
+        } catch(PagoInsuficienteException ex){
+            monVu.addObjeto(m); //Devuelve la moneda si no alcanza
+            System.out.println(ex.getMessage()); //Imprime mensaje de error por pago insuficiente
             return null;
         }
 
         Producto producto = depositoSeleccionado.getObjeto();
-        if (producto == null) {
-            monVu.addObjeto(m); // Devuelve la moneda si no hay stock
+
+        try {RevisaProducto.revisar(producto);
+        } catch(NoHayProductoException ex){
+            monVu.addObjeto(m); //Devuelve la moneda si no hay stock
+            System.out.println(ex.getMessage());
             return null;
         }
-
+        
         // Calcula el vuelto
         int vuelto = (int)(m.getValor() - precioProducto);
         while (vuelto > 0) {
