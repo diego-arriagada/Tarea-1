@@ -9,6 +9,6 @@
 
 public class NoHayProductoException extends Exception{
     public NoHayProductoException(){
-        super("No hay del producto solicitado");
+        super("No hay o no existe el producto solicitado");
     }
 }

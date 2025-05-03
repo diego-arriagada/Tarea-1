@@ -88,7 +88,7 @@ class Expendedor {
                 break;
             default:
                 monVu.addObjeto(m); // Devuelve la moneda si no existe el producto
-                return null;
+                throw new NoHayProductoException();
         }
         if (m.getValor()<precioProducto){
             monVu.addObjeto(m); //Devuelve la moneda si no alcanza
