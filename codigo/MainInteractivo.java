@@ -21,6 +21,7 @@ public class MainInteractivo {
         while (a){
             System.out.println("Indique el numero del producto que desea comprar, si desea finalizar ingrese 0");
             System.out.println("Op: 1 -> COCA, 2 -> SPRITE, 3 -> FANTA, 4 -> SNICKERS, 5 -> SUPER8, 0 -> SALIR");
+            System.out.println("Precios: Coca->500, Sprite->400, Fanta->300, Snickers->200, Super8->100");
             String prod = scan.nextLine();
             int producto = Integer.parseInt(prod);
             if (producto == 0){
