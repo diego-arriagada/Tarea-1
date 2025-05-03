@@ -1,3 +1,4 @@
+import java.util.Scanner;
 /**
  * La clase `MainInteractivo` es una clase donde se puede utilizar
  * las funciones de la máquina expendedora casi sin limitaciones, hasta que el
@@ -12,8 +13,6 @@
  * @author Matias Catril
  * @version 1.0
  */
-
-import java.util.Scanner;
 public class MainInteractivo {
     public static void main(String[] args) {
         boolean a = true;
