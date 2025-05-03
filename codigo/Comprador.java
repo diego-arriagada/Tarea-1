@@ -15,9 +15,16 @@ class Comprador {
         Producto producto = null;
         try {
             producto = exp.comprarProducto(m, cualProducto); // Intenta comprar la bebida
-        } catch (Exception e) {
+        } catch (PagoIncorrectoException e){
             // Si hay algun problema (por ejemplo, sin saldo o sin bebida), no se asigna bebida
-            bebida = null;
+            producto = null;
+            System.out.println(e.getMessage());
+        } catch (PagoInsuficienteException ex){
+            producto = null;
+            System.out.println(ex.getMessage());
+        } catch (NoHayProductoException exe){
+            producto = null;
+            System.out.println(exe.getMessage());
         }
 
         if (bebida != null) {
