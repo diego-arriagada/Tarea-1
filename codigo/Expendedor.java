@@ -110,20 +110,10 @@ class Expendedor {
         
         // Calcula el vuelto
         int vuelto = (int)(m.getValor() - precioProducto);
+
         while (vuelto > 0) {
-            if (vuelto >= 1500) {
-                monVu.addObjeto(new Moneda1500());
-                vuelto -= 1500;
-            } else if (vuelto >= 1000) {
-                monVu.addObjeto(new Moneda1000());
-                vuelto -= 1000;
-            } else if (vuelto >= 500) {
-                monVu.addObjeto(new Moneda500());
-                vuelto -= 500;
-            } else if (vuelto >= 100) {
-                monVu.addObjeto(new Moneda100());
-                vuelto -= 100;
-            }
+            monVu.addObjeto(new Moneda100());
+            vuelto -= 100;
         }
 
         return producto;
