@@ -61,6 +61,7 @@ public class Main {
             System.out.print(arM.get(i) + " ");
         }
         Collections.sort(arM);
+        System.out.println();
         System.out.println("Orden de monedas despues de sort: ");
         for(int i = 0;i<4;i++){
             System.out.print(arM.get(i) + " ");
