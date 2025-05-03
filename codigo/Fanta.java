@@ -6,7 +6,7 @@
  * @author Matias Catril
  * @version 1.0
  */
-class Fanta extends Bebida {
+public class Fanta extends Bebida {
     public Fanta(int serie) {
         super(serie);
     }
