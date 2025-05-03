@@ -101,12 +101,6 @@ class Expendedor {
             throw new NoHayProductoException();
         }
 
-        try {RevisaProducto.revisar(producto);
-        } catch(NoHayProductoException ex){
-            monVu.addObjeto(m); //Devuelve la moneda si no hay stock
-            System.out.println(ex.getMessage());
-            return null;
-        }
         
         // Calcula el vuelto
         int vuelto = (int)(m.getValor() - precioProducto);
