@@ -26,6 +26,13 @@ class Comprador {
             System.out.println(exe.getMessage());
         }
 
+        // Calcula la suma del vuelto entregado por el expendedor
+        vueltoTotal = 0;
+        Moneda vuelto;
+        while ((vuelto = exp.getVuelto()) != null) {
+            vueltoTotal += vuelto.getValor(); // Suma el valor de cada moneda al total
+        }
+
         if (producto != null) {
             sonidoProducto = producto.consumir(); // Guarda el sonido de la bebida
             System.out.println("Compra exitosa de " + sonidoProducto + ", vuelto total = " + cuantoVuelto());
@@ -33,12 +40,7 @@ class Comprador {
             sonidoProducto = null;
         }
 
-        // Calcula la suma del vuelto entregado por el expendedor
-        vueltoTotal = 0;
-        Moneda vuelto;
-        while ((vuelto = exp.getVuelto()) != null) {
-            vueltoTotal += vuelto.getValor(); // Suma el valor de cada moneda al total
-        }
+
     }
 
     public int cuantoVuelto() {
