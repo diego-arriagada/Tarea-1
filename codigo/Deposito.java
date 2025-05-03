@@ -1,5 +1,13 @@
 import java.util.ArrayList;
 
+/**
+ * Clase Deposito que define las funciones de un deposito generico para el resto del codigo.
+ *
+ * @author Diego Arriagada
+ * @author Victor Galaz
+ * @author Matias Catril
+ * @version 1.0
+ */
 public class Deposito<T> {
     ArrayList<T> deposito;
     public Deposito() {

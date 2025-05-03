@@ -1,4 +1,4 @@
-public class Main {
+public class MainInteractivo {
     public static void main(String[] args) {
     }
 }
