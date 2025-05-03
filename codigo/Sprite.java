@@ -6,7 +6,7 @@
  * @author Matias Catril
  * @version 1.0
  */
-class Sprite extends Bebida {
+public class Sprite extends Bebida {
     public Sprite(int serie) {
         super(serie);
     }
